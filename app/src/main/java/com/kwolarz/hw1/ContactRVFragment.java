@@ -2,6 +2,7 @@ package com.kwolarz.hw1;
 
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class ContactRVFragment extends Fragment implements ContactsListAdapter.I
 
         recyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
         adapterRV = new ContactsListAdapter(getActivity(), contactsList);
+        adapterRV.setOnContactClickListener(this);
         recyclerView.setAdapter(adapterRV);
 
         return view;
@@ -85,6 +87,7 @@ public class ContactRVFragment extends Fragment implements ContactsListAdapter.I
 
     @Override
     public void onItemClick(View view, int position) {
+        Log.d("DUPA", "DUPA");
         Toast.makeText(getActivity(), "You clicked " + adapterRV.getItem(position) + " on row " + position, Toast.LENGTH_SHORT).show();
     }
 }
