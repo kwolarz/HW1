@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">HW1</string>
+    <string name="KEY">newContactKey</string>>
+
+    <string name="previous">Previous</string>
+
+    <string name="contacts_rv_fragment_label">Kontakty</string>
+    <string name="add_contact_fragment_label">Dodaj kontakt</string>
 </resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ContactRVFragment">
+
+    <fragment
+        android:id="@+id/ContactRVFragment"
+        android:name="com.kwolarz.hw1.ContactRVFragment"
+        android:label="@string/contacts_rv_fragment_label"
+        tools:layout="@layout/contacts_rv_fragment">
+
+        <action
+            android:id="@+id/action_ContactRVFragment_to_AddContactFragment"
+            app:destination="@id/AddContactFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/AddContactFragment"
+        android:name="com.kwolarz.hw1.AddContactFragment"
+        android:label="@string/add_contact_fragment_label"
+        tools:layout="@layout/add_contact_fragment">
+
+        <action
+            android:id="@+id/action_AddContactFragment_to_ContactRVFragment"
+            app:destination="@id/ContactRVFragment" />
+    </fragment>
+</navigation>
