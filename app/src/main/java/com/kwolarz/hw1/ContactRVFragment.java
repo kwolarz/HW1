@@ -36,7 +36,7 @@ public class ContactRVFragment extends Fragment implements ContactsListAdapter.I
             contactsList = new ArrayList<>();
         } else {
             contactsList = new ArrayList<Contact>();
-            Contact sampleContact = new Contact("", "", "", 0);
+            Contact sampleContact = new Contact(R.drawable.avatar_1,"", "", "", 0);
             contactsList.add(sampleContact);
             contactsList = savedInstanceState.getParcelableArrayList(INSTANCEKEY);
         }

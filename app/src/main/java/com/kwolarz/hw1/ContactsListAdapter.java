@@ -1,6 +1,7 @@
 package com.kwolarz.hw1;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Random;
 
 public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapter.ViewHolder> {
 
     private List<Contact> contactsList;
     private LayoutInflater mInflater;
     private ItemClickInterface onContactClickListener;
+
 
     public ContactsListAdapter (Context context, List<Contact> data) {
         this.mInflater = LayoutInflater.from(context);
@@ -34,7 +37,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         String contactFirstName = contactsList.get(position).firstName;
         holder.firstNameTV.setText(contactFirstName);
 
-        holder.contactIV.setImageResource(R.drawable.avatar_1);
+        holder.contactIV.setImageResource(contactsList.get(position).imageID);
 
         holder.removeContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +47,6 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             }
         });
     }
-
 
     @Override
     public int getItemCount() { return contactsList.size(); }

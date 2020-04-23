@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class AddContactFragment extends Fragment {
 
@@ -40,6 +41,18 @@ public class AddContactFragment extends Fragment {
         this.contactsList = getArguments().getParcelableArrayList(CONTACTKEY);
     }
 
+    private int setRandomAvatar() {
+        int[] res = {
+                R.drawable.avatar_1, R.drawable.avatar_2, R.drawable.avatar_3, R.drawable.avatar_4, R.drawable.avatar_5, R.drawable.avatar_6,
+                R.drawable.avatar_7, R.drawable.avatar_8, R.drawable.avatar_9, R.drawable.avatar_10, R.drawable.avatar_11, R.drawable.avatar_12,
+                R.drawable.avatar_13, R.drawable.avatar_14, R.drawable.avatar_15, R.drawable.avatar_16
+        };
+        Random rand = new Random();
+        int random = rand.nextInt(res.length);
+
+        return res[random];
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -52,7 +65,7 @@ public class AddContactFragment extends Fragment {
 
                 String fN = editText.getText().toString();
 
-                Contact contact = new Contact(fN, "", "", 1);
+                Contact contact = new Contact(setRandomAvatar(), fN, "", "", 1);
                 contactsList.add(contact);
 
                 Bundle newContactBundle = new Bundle();

@@ -5,12 +5,14 @@ import android.os.Parcelable;
 
 class Contact implements Parcelable {
 
+    public int imageID;
     public String firstName;
     public String lastName;
     public String birthDate;
     public int phoneNumber;
 
-    Contact(String firstName, String lastName, String birthDate, int phoneNumber) {
+    Contact(int imageID, String firstName, String lastName, String birthDate, int phoneNumber) {
+        this.imageID = imageID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
@@ -18,6 +20,7 @@ class Contact implements Parcelable {
     }
 
     protected Contact(Parcel in) {
+        imageID = in.readInt();
         firstName = in.readString();
         lastName = in.readString();
         birthDate = in.readString();
@@ -43,6 +46,7 @@ class Contact implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(imageID);
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(birthDate);
