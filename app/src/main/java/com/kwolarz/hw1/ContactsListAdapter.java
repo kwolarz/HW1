@@ -1,6 +1,8 @@
 package com.kwolarz.hw1;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +20,12 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     private LayoutInflater mInflater;
     private ItemClickInterface onContactClickListener;
 
+    private Context context;
 
     public ContactsListAdapter (Context context, List<Contact> data) {
         this.mInflater = LayoutInflater.from(context);
         this.contactsList = data;
+        this.context = context;
     }
 
     @Override
@@ -40,8 +44,22 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         holder.removeContactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contactsList.remove(position);
-                notifyDataSetChanged();
+
+                new AlertDialog.Builder(context)
+                        .setTitle("Usuń kontakt")
+                        .setMessage("Czy napewno chcesz usunąć kontakt?")
+
+                        .setPositiveButton(R.string.tak, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                contactsList.remove(position);
+                                notifyDataSetChanged();
+                            }
+                        })
+
+                        .setNegativeButton(R.string.nie, null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
             }
         });
     }

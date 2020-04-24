@@ -4,6 +4,9 @@
 
     <string name="previous">Previous</string>
 
+    <string name="tak">TAK</string>
+    <string name="nie">NIE</string>
+
     <string name="contacts_rv_fragment_label">Kontakty</string>
     <string name="add_contact_fragment_label">Dodaj kontakt</string>
 </resources>
