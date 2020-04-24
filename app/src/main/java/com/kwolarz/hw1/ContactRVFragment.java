@@ -34,6 +34,7 @@ public class ContactRVFragment extends Fragment implements ContactsListAdapter.I
 
     private String INSTANCEKEY = "savedInstanceKey";
     private String CONTACTKEY = "newContactKey";
+    private String DETAILKEY = "detailContactKey";
 
     private int contactPositon;
 
@@ -123,7 +124,13 @@ public class ContactRVFragment extends Fragment implements ContactsListAdapter.I
     @Override
     public void onItemClick(View view, int position) {
 
-        Toast.makeText(getActivity(), "You clicked " + adapterRV.getItem(position).firstName + " on row " + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "You clicked " + adapterRV.getItem(position).firstName + " on row " + position, Toast.LENGTH_SHORT).show();
+
+        Bundle detailContactBundle = new Bundle();
+        detailContactBundle.putParcelable(DETAILKEY, (Contact) adapterRV.getItem(position));
+
+        NavHostFragment.findNavController(ContactRVFragment.this)
+                .navigate(R.id.action_ContactRVFragment_to_DetailContactFragment, detailContactBundle);
     }
 
     @Override

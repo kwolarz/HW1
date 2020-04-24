@@ -9,4 +9,7 @@
 
     <string name="contacts_rv_fragment_label">Kontakty</string>
     <string name="add_contact_fragment_label">Dodaj kontakt</string>
+
+    <string name="detail_contact_fragment_label">Kontakt</string>
+
 </resources>
