@@ -1,5 +1,11 @@
 package com.kwolarz.hw1;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -8,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +30,12 @@ import java.util.List;
 
 public class ContactRVFragment extends Fragment implements ContactsListAdapter.ItemClickInterface {
 
+    private static final int REQUEST_CALL = 1;
+
     private String INSTANCEKEY = "savedInstanceKey";
     private String CONTACTKEY = "newContactKey";
+
+    private int contactPositon;
 
     FloatingActionButton fab;
     ContactsListAdapter adapterRV;
@@ -84,10 +98,49 @@ public class ContactRVFragment extends Fragment implements ContactsListAdapter.I
         });
     }
 
+    private void makePhoneCall(int position) {
+        if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            final String phone = Integer.toString(adapterRV.getItem(position).phoneNumber);
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", phone, null));
+            startActivity(intent);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                makePhoneCall(contactPositon);
+            }
+        }
+
+    }
 
     @Override
     public void onItemClick(View view, int position) {
-        Log.d("DUPA", "DUPA");
-        Toast.makeText(getActivity(), "You clicked " + adapterRV.getItem(position) + " on row " + position, Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(getActivity(), "You clicked " + adapterRV.getItem(position).firstName + " on row " + position, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onLongItemClick(View view, final int position) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("Zadzwonic do " + adapterRV.getItem(position).firstName + "?")
+
+                .setPositiveButton(R.string.tak, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        contactPositon = position;
+                        makePhoneCall(contactPositon);
+                    }
+                })
+
+                .setNegativeButton(R.string.nie, null)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
 }

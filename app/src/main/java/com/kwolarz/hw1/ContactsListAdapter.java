@@ -19,7 +19,6 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     private List<Contact> contactsList;
     private LayoutInflater mInflater;
     private ItemClickInterface onContactClickListener;
-
     private Context context;
 
     public ContactsListAdapter (Context context, List<Contact> data) {
@@ -67,7 +66,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     @Override
     public int getItemCount() { return contactsList.size(); }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         ImageView contactIV;
         TextView firstNameTV;
@@ -81,6 +80,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             removeContactButton = itemView.findViewById(R.id.removeRowItemButton);
 
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -89,15 +89,25 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             if(onContactClickListener != null)
                 onContactClickListener.onItemClick(view, getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            if(onContactClickListener != null)
+                onContactClickListener.onLongItemClick(view, getAdapterPosition());
+            return true;
+        }
     }
 
-    String getItem(int id) { return contactsList.get(id).firstName; }
+    Contact getItem(int id) { return contactsList.get(id); }
 
     void setOnContactClickListener(ItemClickInterface itemClickListener) {
         this.onContactClickListener = itemClickListener;
     }
 
+
+
     public interface ItemClickInterface {
         void onItemClick(View view, int position);
+        void onLongItemClick(View view, int position);
     }
 }
