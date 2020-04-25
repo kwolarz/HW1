@@ -37,7 +37,6 @@
         android:label="@string/detail_contact_fragment_label"
         tools:layout="@layout/detail_contact_fragment">
 
-
     </fragment>
 
 </navigation>

@@ -105,7 +105,6 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     }
 
 
-
     public interface ItemClickInterface {
         void onItemClick(View view, int position);
         void onLongItemClick(View view, int position);

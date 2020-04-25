@@ -55,6 +55,7 @@ public class AddContactFragment extends Fragment {
                 R.drawable.avatar_7, R.drawable.avatar_8, R.drawable.avatar_9, R.drawable.avatar_10, R.drawable.avatar_11, R.drawable.avatar_12,
                 R.drawable.avatar_13, R.drawable.avatar_14, R.drawable.avatar_15, R.drawable.avatar_16
         };
+
         Random rand = new Random();
         int random = rand.nextInt(res.length);
 
@@ -77,7 +78,7 @@ public class AddContactFragment extends Fragment {
 
     private boolean checkBirthDateInput(String birth) {
         if (birth.trim().equals("")) {
-            return true;
+            return false;
         } else {
 
             SimpleDateFormat sdfrmt = new SimpleDateFormat("dd/MM/yyyy");
