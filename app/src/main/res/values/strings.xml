@@ -2,7 +2,8 @@
     <string name="app_name">HW1</string>
     <string name="KEY">newContactKey</string>>
 
-    <string name="previous">Previous</string>
+
+    <string name="Dodaj">DODAJ</string>
 
     <string name="tak">TAK</string>
     <string name="nie">NIE</string>
